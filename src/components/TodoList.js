@@ -1,30 +1,49 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
+class ListTodos extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
-function ListTodos({ todos }) {
-    return (
-        <div className="container">
-            <ul className="todos">
-                {todos.map(todo => <li dataid={todo.id} key={todo.id}>
-                    <span>{todo.title}</span>
-                    <span><button id={todo.id} todo-title={todo.title} ><i className="fa-solid fa-check"></i></button>
-                        <button id={todo.id} ><i className="fa-solid fa-xmark"></i></button></span>
-                </li>)}
-            </ul>
-        </div>
-    );
+    render() {
+        return (
+            <div className="container">
+                <ul className="todos">
+                    {this.props.todos.map(todo =>
+                        <li dataid={todo.id} key={todo.id}>
+                            <span style={{
+                                textDecoration: todo.completed ? "line-through" : "none",
+                            }}>{todo.title}</span>
+                            <TodoItem {...todo} removeTodo={this.props.removeTodo} changeTodo={this.props.changeTodo} />
+                        </li>)}
+                </ul>
+            </div >
+        );
+    }
 }
 
-{/* <div className="container">
-            <ul className="todos">
-                {todos.map(todo => <li dataid={todo.id} key={todo.id}>
-                    <span style={todo.completed ? 'text-decoration: line-through' : ''}>{todo.title}</span>
-                    <span><button id={todo.id} todo-title={todo.title} onClick={this.completeTodo}><i className="fa-solid fa-check"></i></button>
-                        <button id={todo.id} onClick={this.delTodos}><i className="fa-solid fa-xmark"></i></button></span>
-                </li>)}
-            </ul>
-        </div> */}
+
+// function ListTodos({ todos }) {
+//     return (
+//         <div className="container">
+//             <ul className="todos">
+//                 {todos.map(todo => <li dataid={todo.id} key={todo.id}>
+//                     <span style={{
+//                         textDecoration: todo.completed ? "line-through" : "none",
+//                     }}>{todo.title}</span>
+//                     <span><button id={todo.id} todo-title={todo.title} onClick={this.changeTodo}><i className="fa-solid fa-check"></i></button>
+//                         <button id={todo.id} ><i className="fa-solid fa-xmark"></i></button></span>
+//                 </li>)}
+//             </ul>
+//         </div >
+//     );
+// }
 
 
-export default ListTodos
+
+// onClick={() => changeTodo(todo.id, todo.title)}
+
+
+export default ListTodos;

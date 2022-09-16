@@ -91,7 +91,7 @@
         padding-right: 2px;
     }
     
-    .completed li{
+    .task-completed{
         text-decoration: line-through;
         color: black;
     }

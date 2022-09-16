@@ -55,13 +55,23 @@ class App extends React.Component {
     console.dir(`newTodo: ${newTodo}`);
   }
 
-  removeTodo = () => {
-    //...
+  removeTodo = (todo) => {
+    const todos = this.state.todos.filter((todo) => {
+      return todo.id !== todo
+    });
+    fetch(`${url}/${todo}`, {
+      method: 'DELETE',
+    }).then(() => {
+      this.setState({ todos });
+    })
+
+    console.log(todos);
   }
 
-  changeTodo = () => {
-    //
-  }
+  changeTodo = (title, todo) => {
+  };
+
+
 
   render() {
     return (
@@ -69,10 +79,12 @@ class App extends React.Component {
         <Header />
         <main className="todo-app">
           <AddTodo addTodo={this.addTodo} />
-          <ListTodos todos={this.state.todos} />
+          <ListTodos todos={this.state.todos}
+            changeTodo={this.changeTodo}
+            removeTodo={this.removeTodo} />
         </main>
       </div>
     );
   }
 }
-export default App;
+export default App
