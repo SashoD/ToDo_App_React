@@ -62,7 +62,9 @@ class App extends React.Component {
     fetch(`${url}/${todo}`, {
       method: 'DELETE',
     }).then(() => {
-      this.setState({ todos });
+      this.setState({
+        todos: [...todos]
+      });
     })
 
     console.log(todos);
