@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-class ListTodos extends React.Component {
+class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -46,4 +46,4 @@ class ListTodos extends React.Component {
 // onClick={() => changeTodo(todo.id, todo.title)}
 
 
-export default ListTodos;
+export default TodoList;

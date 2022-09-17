@@ -17,11 +17,15 @@ class AddTodo extends React.Component {
                 <input type="text"
                     autoFocus
                     placeholder="add new todo ..."
+                    value={this.state.value}
                     onChange={(e) => { this.setState({ value: e.target.value }) }} />
                 <button
                     className="btn"
                     id='btn'
-                    onClick={(e) => { this.props.addTodo(this.state.value) }}
+                    onClick={(e) => {
+                        this.props.addTodo(this.state.value)
+                        this.setState({ value: "" })
+                    }}
                     type="button">Add</button>
             </form>
         );

@@ -1,9 +1,8 @@
-
 import './style.css';
 import React from 'react';
 import Header from './components/Header';
-import AddTodo from './components/AddToDo';
-import ListTodos from './components/TodoList';
+import AddTodo from './components/AddTodo';
+import TodoList from './components/TodoList';
 
 const url = ' http://localhost:8000/todos'
 
@@ -24,17 +23,16 @@ class App extends React.Component {
           return r.json()
         }
       })
+
       .then(data => {
-        // todos = data;
         this.setState({ todos: data })
+        console.log(`result of 1st fetch ${data}`);
       })
       .catch(err => console.warn(err));
   }
 
   addTodo = (title) => {
-    console.log(`addtodo`);
     const newTodo = {
-      id: this.state.todos.length + 1,
       title: title,
       completed: false,
     }
@@ -45,34 +43,64 @@ class App extends React.Component {
         'Content-type': 'application/json; charset=UTF-8'
       }
     })
+      .then(r => {
+        if (r.ok) {
+          return r.json()
+        }
+      })
+      .then(todo => {
+        this.setState({
+          todos: [...this.state.todos, todo]
+        })
+        console.dir(`added todo after addtodo ${todo}`);
+      })
 
-    this.setState({
-      todos: [...this.state.todos, newTodo]
-
-    })
 
 
     console.dir(`newTodo: ${newTodo}`);
   }
 
-  removeTodo = (todo) => {
-    const todos = this.state.todos.filter((todo) => {
-      return todo.id !== todo
-    });
-    fetch(`${url}/${todo}`, {
+  removeTodo = (todoId) => {
+    console.log(todoId);
+    fetch(`${url}/${todoId}`, {
       method: 'DELETE',
-    }).then(() => {
-      this.setState({
-        todos: [...todos]
-      });
     })
-
-    console.log(todos);
+      .then((response) => {
+        if (response.ok) {
+          this.setState({
+            todos: [...this.state.todos.filter(({ id }) => id !== todoId)]
+          });
+        } else {
+          console.error("Server returned an error code.");
+        }
+      })
+      .catch(e => {
+        console.error("Something went wrong while trying to send a DELETE request to the server.");
+      });
   }
 
-  changeTodo = (title, todo) => {
+  changeTodo = (todoId) => {
+    const checkedToDo = this.state.todos.find(({ id }) => id === todoId);
+    fetch(`${url}/${todoId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ ...checkedToDo, completed: true }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          this.setState({
+            todos: [...this.state.todos.map(todo => ({ ...todo, completed: todo.id === todoId ? true : todo.completed }))]
+          });
+        } else {
+          console.error("Server returned an error code.");
+        }
+      })
+      .catch(e => {
+        console.error("Something went wrong while trying to send a DELETE request to the server.");
+      });
   };
-
 
 
   render() {
@@ -81,7 +109,7 @@ class App extends React.Component {
         <Header />
         <main className="todo-app">
           <AddTodo addTodo={this.addTodo} />
-          <ListTodos todos={this.state.todos}
+          <TodoList todos={this.state.todos}
             changeTodo={this.changeTodo}
             removeTodo={this.removeTodo} />
         </main>
