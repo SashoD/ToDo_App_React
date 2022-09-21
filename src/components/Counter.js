@@ -4,16 +4,15 @@ class Counter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todos: this.setState
         };
     }
 
     render() {
-        const countTotal = this.props.length
+        const counter = this.props.todos.length
         return (
 
-            <div className="total-tasks">
-                Total Tasks: <span>{countTotal}</span>
+            <div className="total-todo">
+                Total Tasks:<span className="space">{counter}</span>
             </div>
         );
 

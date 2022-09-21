@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './components/Header';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
+import Counter from './components/Counter';
 
 const url = ' http://localhost:8000/todos'
 
@@ -112,6 +113,7 @@ class App extends React.Component {
           <TodoList todos={this.state.todos}
             changeTodo={this.changeTodo}
             removeTodo={this.removeTodo} />
+          <Counter todos={this.state.todos} />
         </main>
       </div>
     );
