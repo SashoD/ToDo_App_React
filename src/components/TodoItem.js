@@ -9,7 +9,7 @@ class TodoItem extends React.Component {
         return (
             <span><button id={this.props.id} todo-title={this.props.title}
                 onClick={() => { this.props.changeTodo(this.props.id) }}><i className="fa-solid fa-check"></i></button>
-                <button key={this.props.id}
+                <button key={this.props.id} className="space"
                     onClick={() => { this.props.removeTodo(this.props.id) }}><i className="fa-solid fa-xmark"></i></button></span >
         );
     }

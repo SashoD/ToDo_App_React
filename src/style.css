@@ -71,7 +71,7 @@
     
     span > button {
         background-color: rgba(11, 11, 51, 0.719);
-        width: 2vw;
+        width: 2.3vw;
         height: 4vh;
         border-radius: 1vw;
         border-style: none;
@@ -79,7 +79,7 @@
     }
     
     button + button {
-        width: 2vw;
+        width: 2.3vw;
         height: 4vh;
         cursor: pointer;
         background-color: rgb(129, 28, 28);
