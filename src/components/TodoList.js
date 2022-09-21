@@ -1,5 +1,6 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import Counter from "./Counter"
 
 class TodoList extends React.Component {
     constructor(props) {
@@ -19,8 +20,13 @@ class TodoList extends React.Component {
                             <TodoItem {...todo} removeTodo={this.props.removeTodo} changeTodo={this.props.changeTodo} />
                         </li>)}
                 </ul>
+                <div>
+                    <Counter/>
+                </div>
             </div >
+            
         );
+        
     }
 }
 

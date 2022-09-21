@@ -1,22 +1,22 @@
 {
   "todos": [
     {
-      "title": "Azis",
+      "title": "Learn 1",
       "completed": false,
       "id": 1
     },
     {
-      "title": "Luna",
-      "completed": true,
+      "title": "Learn 2",
+      "completed": false,
       "id": 2
     },
     {
-      "title": "Galena",
+      "title": "Learn 3",
       "completed": false,
       "id": 3
     },
     {
-      "title": "Preslava <3",
+      "title": "Learn 4",
       "completed": false,
       "id": 4
     }
